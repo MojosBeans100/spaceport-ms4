@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="white-div">
+    <form action="create_pipeline.html" method="POST">
+        {% csrf_token %}
+      
+        {{ form.as_p }}
+
+        <p>{{ result }}</p>
+      
+
+        <input type="submit">
+    </form>
+</div>
+<!-- <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
+<div id='map' style='width: 400px; height: 300px;'></div>
+<script>
+    mapboxgl.accessToken =
+        'pk.eyJ1IjoibW9qb3NiZWFucyIsImEiOiJja3ZjajlnZ2UwOWY4MnFvMDFtNXJuNWZsIn0.DrKuertlKq9LdrrNNY2Djw';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11'
+    });
+</script> -->
+
+<!-- <div id="main_div">
+    <div class="pipeline_form" id="pipeline_form1">
+        <h2>Create Pipeline Form</h2>
+        <form>
+            <label for="user_name">Pipeline Name</label>
+            <input type="text" name="user_name">
+            <br>
+
+            <label for="geojson">AOI</label>
+            <input type="text" name="geojson">
+            <br>
+
+            <label for="start_date">Start Date</label>
+            <input type="date" name="start_date">
+            <br>
+
+            <label for="end_date">End Date</label>
+            <input type="date" name="end_date">
+            <br>
+
+            <label for="interval">Interval (days)</label>
+            <input type="number" name="interval" min="1" max="24" />
+            <br>
+
+            <label for="end_date">Resolution</label>
+            <select name="resolution">
+                <option value="low">Low</option>
+                <option value="med">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <br>
+
+            <label for="coverage">Coverage</label>
+            <input type="text" name="coverage">%
+            <br>
+
+            <button>Back</button>
+            <button>Next</button>
+        </form>
+
+    </div>
+</div> -->
+
+<script src="static/js/script.js"></script>
+
+{%endblock%}

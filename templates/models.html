@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>See API Results</h1>
+<a href="{% url 'home' %}">Back to homepage</a>
+
+{% for model in model_list %}
+
+
+<p>{{ model.satellite_id }}</p>
+
+{% endfor %}
+
+
+{%endblock%}
+

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="white-div">
+
+   
+
+    <a href="{% url 'home' %}">Back to homepage</a>
+    <h3 id="h3_1">Form</h3>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit">
+    </form>
+
+    <h2>{{ error_msg }}</h2>
+
+    <ul>
+        <li>Satellite ID: {{ satellite_data.id }}</li>
+        <li>Satellite Name: {{ satellite_data.satellite_name }}</li>
+        <li>Average footprint: {{ satellite_data.avg_footprint_width }}</li>
+
+    </ul>
+
+    <a href="{{ image_url }}" target="_blank" download>Click here</a>
+
+
+</div>
+
+{%endblock%}
+
+
+
+<!-- 
+
+// var satellite_id;
+// var url; 
+
+// for (let i = 1; i < 10; i++) {
+//     satellite_id = i;
+//     url = `https://api.spectator.earth/satellite/${i}`
+
+//     fetch(url)
+//     .then(function (response) {
+//         return response.json();
+//     })
+//     .then(function (data) {
+//         document.getElementById("content").innerText += data.properties.name;
+        
+//         //console.log(data)
+//     });
+// }
+// const satellite_id = 1;
+// const url = `https://api.spectator.earth/satellite/${satellite_id}`;
+
+// fetch(url)
+//     .then(function (response) {
+//         return response.json();
+//     })
+//     .then(function (data) {
+//         document.getElementById("content").innerText = data.geometry.coordinates;
+//         //console.log(data)
+//     }); -->
+
+
+<!-- <script>
+    const api_key = 'fd6c291cff3fa7916ce56c6ae28951b42ab52167e10a83020bc663b052a655a9';
+    const bbox = '19.59,49.90,20.33,50.21';
+    const url = 'https://api.spectator.earth/imagery/?api_key=fd6c291cff3fa7916ce56c6ae28951b42ab52167e10a83020bc663b052a655a9&bbox=19.59,49.90,20.33,50.21';
+
+    fetch(url).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        console.log(data.results);
+        // document.getElementById("content").innerText = data.results[0].download_url;
+        // var img = document.createElement("img");
+        // img.src = data.results[0].download_url;
+
+    });
+</script> -->
