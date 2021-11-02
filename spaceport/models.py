@@ -14,6 +14,7 @@ class PipelineList(models.Model):
     )
 
     pipeline_id = models.CharField(max_length=20)              # AUTO unique identifier for this pipeline (auto generated?)
+    slug = models.SlugField(max_length=200, unique=True, null=True)
     pipeline_name = models.CharField(max_length=50, unique=True)	        # user's given name for pipeline
     pipeline_des = models.TextField()                                       # user's given description
     created_by = models.CharField(max_length=100, null=True)	            # AUTO user	(username or email?)

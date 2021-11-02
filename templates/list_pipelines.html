@@ -16,9 +16,10 @@
             {% for pl in pipeline_list %}
             <tr>
                 <th scope="row">{{pl.pipeline_id}}</th>
-                <td><a href="">{{pl.pipeline_name}}</a></td>
+                <td><a href="{% url 'post_detail' pl.id %}">{{pl.pipeline_name}}</a></td>
                 <td>{{pl.date_created}}</td>
                 <td>{{pl.created_by}}</td>
+                <td>{{pl.slug}}</td>
             </tr>
             {% endfor %}
         </tbody>

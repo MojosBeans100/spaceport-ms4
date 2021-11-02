@@ -5,7 +5,7 @@ from .models import PipelineList
 
 @admin.register(PipelineList)
 class PipelineListAdmin(admin.ModelAdmin):
-    list_display = ('pipeline_name', 'pipeline_des', 'AOI','start_date', 'end_date','date_created')
+    list_display = ('pipeline_name', 'pipeline_des', 'AOI','start_date', 'end_date', 'date_created')
 
 
 

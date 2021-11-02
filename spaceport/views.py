@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.shortcuts import render, get_object_or_404
 from .models import PipelineList
 from .forms import CreatePipeline
 import requests
@@ -9,14 +10,14 @@ import json
 
 
 def homepage(request):
-    return render(request, 'base.html')
+    return render(request, '/base.html')
 
 def lists(request):
 
     user = str(request.user)
 
     pipeline_list = PipelineList.objects.filter(created_by = user)
-    print(pipeline_list)
+    #print(pipeline_list)
 
     if len(pipeline_list) == 0:
         context = {'message': "You currently have no pipelines"}
@@ -26,16 +27,27 @@ def lists(request):
 
     return render(request, 'list_pipelines.html', context)
 
-# def create_pipeline(request):
-#     return render(request, 'create_pipeline.html')
 
-# class lists(generic.ListView):
-#     model = PipelineList()
-#     queryset = PipelineResults.objects.order_by('satellite_id')
-#     #print(model)
-#     template_name = "list_pipelines.html"
-#     #paginate_by = 6
+# pass id attribute from urls
+def detail_view(request, id):
+    # dictionary for initial data with
+    # field names as keys
+    context ={}
+ 
+    # add the dictionary during initialization
+    context["data"] = PipelineList.objects.get(id = id)
+         
+    return render(request, "post_detail.html", context)
 
+
+def delete_pipeline(request, id):
+
+    print("deleted!")
+
+    object_to_delete = PipelineList.objects.get(id = id)
+    object_to_delete.delete()
+
+    return redirect('/list_pipelines.html')
 
 
 def create_pipeline(request):
@@ -117,6 +129,8 @@ def create_pipeline(request):
             result = "Form submission complete!"
             context = {'form': form, 'result': result}
 
+            return redirect('list_pipelines.html')
+
 
         else:
             print("not valid")
@@ -124,11 +138,13 @@ def create_pipeline(request):
             result = "Form not valid: please submit another"
 
             context = {'form': form, 'result': result}
+
+            return render(request, 'create_pipeline.html', context)
     
     
 
     # render function to send the form back to index.html
-    return render(request, 'create_pipeline.html', context)
+    #return render(request, 'create_pipeline.html', context)
 
    
 
@@ -760,3 +776,23 @@ def create_pipeline(request):
 #     context = { 'satellite_info' : data}
 
 #     return render(request, 'index.html', context)
+
+# def create_pipeline(request):
+#     return render(request, 'create_pipeline.html')
+
+# class lists(generic.ListView):
+#     model = PipelineList()
+#     queryset = PipelineResults.objects.order_by('satellite_id')
+#     #print(model)
+#     template_name = "list_pipelines.html"
+#     #paginate_by = 6
+
+# def pipeline_detail(request, id=None):
+
+#     displayed_pipeline = get_object_or_404(PipelineList, id=id)
+
+#     print(displayed_pipeline)
+    
+#     context= {'displayed_pipeline': displayed_pipeline}
+    
+#     return render(request, 'pipeline_detail.html', context)

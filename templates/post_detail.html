@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- GENERAL INFO -->
+<div class=center-div>
+   <h1>{{ data.pipeline_name }}</h1>
+   <h2>{{ data.pipeline_des }}</h2>
+
+   <p>Date created: {{ data.date_created }}</p>
+   <p>Start date: {{ data.start_date }}</p>
+   <p>End date: {{ data.end_date }}</p>
+   <p>AOI: {{ data.AOI }}</p>
+   <a href="{% url 'delete_pipeline' data.id %}">Delete pipeline</a>
+</div>
+
+<!-- AOI -->
+
+<!-- TASKING DETAILS -->
+
+<!-- RESULTS -->
+
+{%endblock%}
