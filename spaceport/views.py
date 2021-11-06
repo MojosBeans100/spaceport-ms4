@@ -8,26 +8,6 @@ from .forms import CreatePipeline
 import requests
 import json
 
-
-def homepage(request):
-    return render(request, '/base.html')
-
-def lists(request):
-
-    user = str(request.user)
-
-    pipeline_list = PipelineList.objects.filter(created_by = user)
-    #print(pipeline_list)
-
-    if len(pipeline_list) == 0:
-        context = {'message': "You currently have no pipelines"}
-
-    else:
-        context = {'pipeline_list': pipeline_list}
-
-    return render(request, 'list_pipelines.html', context)
-
-
 # pass id attribute from urls
 def detail_view(request, id):
     # dictionary for initial data with
@@ -49,9 +29,63 @@ def delete_pipeline(request, id):
 
     return redirect('/list_pipelines.html')
 
+def homepage(request):
+    return render(request, 'base.html')
+
+def lists(request):
+
+    user = str(request.user)
+
+    pipeline_list = PipelineList.objects.filter(created_by=user)
+    #print(pipeline_list)
+
+    if len(pipeline_list) == 0:
+        context = {'message': "You currently have no pipelines"}
+
+    else:
+        context = {'pipeline_list': pipeline_list}
+
+    return render(request, 'list_pipelines.html', context)
+
+def create_pipeline2(request):
+    return render(request, 'create_pipeline2.html')
+
+# class lists(generic.ListView):
+#     model = PipelineList()
+#     queryset = PipelineResults.objects.order_by('satellite_id')
+#     #print(model)
+#     template_name = "list_pipelines.html"
+#     #paginate_by = 6
+
+# def pipeline_detail(request, id=None):
+
+#     displayed_pipeline = get_object_or_404(PipelineList, id=id)
+
+#     print(displayed_pipeline)
+    
+#     context= {'displayed_pipeline': displayed_pipeline}
+    
+#     return render(request, 'pipeline_detail.html', context)
+
+# class PostDetail(View):
+#     # post detail of the posts
+
+#     def get(self, request, slug, *args, **kwargs):
+
+#         # define queryset: basically our Post model but with only active posts
+#         queryset = PipelineList.objects.filter(status=1)
+        
+
+#         # define post: this function calls the given model and get object from that 
+#         # if that object or model doesn’t exist it raise 404 error
+#         post = get_object_or_404(queryset, slug=slug)
+
+#         context = {"post": post}
+
+#         return render(request, "post_detail.html", context)
+
 
 def create_pipeline(request):
-
     
     form = CreatePipeline()
     context = {'form': form}
@@ -60,52 +94,7 @@ def create_pipeline(request):
 
         form = CreatePipeline(request.POST)
 
-        user = str(request.user)
-
-        print(user)
-
-        #print(form.is_valid())
-
-        # start_date = request.POST['start_date']
-        # end_date = request.POST['end_date']
-        # pipeline_name = request.POST['pipeline_name']
-        # pipeline_des = request.POST['pipeline_des']
-        # AOI = request.POST['AOI']
-        # output_format = request.POST['output_format']
-
-        # start_date_type = type(request.POST['start_date']) 
-        # end_date_type = type(request.POST['end_date'])
-        # pipeline_name_type = type(request.POST['pipeline_name'])
-        # pipeline_des_type = type(request.POST['pipeline_des'])
-        # AOI_type = type(request.POST['AOI'])
-        # output_format_type = type(request.POST['output_format'])
-    
-        # print(f"Start date: {start_date}")
-        # print(f"Start date type: {start_date_type}")
-
-        # print(f"End date: {end_date}")
-        # print(f"End date type: {end_date_type}")
-
-        # print(f"Pipeline name: {pipeline_name}")
-        # print(f"Pipeline name type: {pipeline_name_type}")
-
-        # print(f"Pipeline des: {pipeline_des}")
-        # print(f"Pipeline des type: {pipeline_des_type}")
-
-        # print(f"AOI: {AOI}")
-        # print(f"AOI type: {AOI_type}")
-
-        # print(f"Output format: {output_format}")
-        # print(f"Output format type: {output_format_type}")
-
-        # form_data = {
-        #     "start_date": start_date,
-        #     "end_date": end_date,
-        #     "pipeline name": name,
-        # }
-
-        # print(form_data)
-        
+        user = str(request.user)       
 
         if form.is_valid():
 
@@ -129,8 +118,6 @@ def create_pipeline(request):
             result = "Form submission complete!"
             context = {'form': form, 'result': result}
 
-            return redirect('list_pipelines.html')
-
 
         else:
             print("not valid")
@@ -138,13 +125,11 @@ def create_pipeline(request):
             result = "Form not valid: please submit another"
 
             context = {'form': form, 'result': result}
-
-            return render(request, 'create_pipeline.html', context)
     
     
 
     # render function to send the form back to index.html
-    #return render(request, 'create_pipeline.html', context)
+    return render(request, 'create_pipeline.html', context)
 
    
 
@@ -777,22 +762,46 @@ def create_pipeline(request):
 
 #     return render(request, 'index.html', context)
 
-# def create_pipeline(request):
-#     return render(request, 'create_pipeline.html')
+#print(user)
 
-# class lists(generic.ListView):
-#     model = PipelineList()
-#     queryset = PipelineResults.objects.order_by('satellite_id')
-#     #print(model)
-#     template_name = "list_pipelines.html"
-#     #paginate_by = 6
+        #print(form.is_valid())
 
-# def pipeline_detail(request, id=None):
+        # start_date = request.POST['start_date']
+        # end_date = request.POST['end_date']
+        # pipeline_name = request.POST['pipeline_name']
+        # pipeline_des = request.POST['pipeline_des']
+        # AOI = request.POST['AOI']
+        # output_format = request.POST['output_format']
 
-#     displayed_pipeline = get_object_or_404(PipelineList, id=id)
-
-#     print(displayed_pipeline)
+        # start_date_type = type(request.POST['start_date']) 
+        # end_date_type = type(request.POST['end_date'])
+        # pipeline_name_type = type(request.POST['pipeline_name'])
+        # pipeline_des_type = type(request.POST['pipeline_des'])
+        # AOI_type = type(request.POST['AOI'])
+        # output_format_type = type(request.POST['output_format'])
     
-#     context= {'displayed_pipeline': displayed_pipeline}
-    
-#     return render(request, 'pipeline_detail.html', context)
+        # print(f"Start date: {start_date}")
+        # print(f"Start date type: {start_date_type}")
+
+        # print(f"End date: {end_date}")
+        # print(f"End date type: {end_date_type}")
+
+        # print(f"Pipeline name: {pipeline_name}")
+        # print(f"Pipeline name type: {pipeline_name_type}")
+
+        # print(f"Pipeline des: {pipeline_des}")
+        # print(f"Pipeline des type: {pipeline_des_type}")
+
+        # print(f"AOI: {AOI}")
+        # print(f"AOI type: {AOI_type}")
+
+        # print(f"Output format: {output_format}")
+        # print(f"Output format type: {output_format_type}")
+
+        # form_data = {
+        #     "start_date": start_date,
+        #     "end_date": end_date,
+        #     "pipeline name": name,
+        # }
+
+        # print(form_data)

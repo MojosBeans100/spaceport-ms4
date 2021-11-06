@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="center-div">
+
+    <!-- action="create_pipeline.html" method="POST" -->
+    <form id="create_pipeline_form" action="create_pipeline2.html" method="POST">
+        {% csrf_token %}
+
+        <div class="center-div-form" id="center-div1">
+            <h1 id="top-text">Use this application to create a new pipeline</h1>
+            <button type="button" id="ok-btn" onclick="tabform(this);">OK</button>
+        </div>
+
+        <div class="center-div-form" id="center-div2">
+            <h2>Create Pipeline</h2>
+            <label for="pipeline_name">Pipeline Name</label>
+            {{ form.pipeline_name }}
+            <br>
+            <div>
+                <label for="pipeline_des">Pipeline Description</label>
+                {{ form.pipeline_des }}
+            </div>
+            <br>
+            <!-- <input type="text" placeholder="Give your pipeline a unique identifier">
+            <input type="text" placeholder="Give your pipeline a description"> -->
+            <button type="button" class="btn btn-secondary btn-lg" onclick="tabback(this);">Back</button>
+            <button type="button" class="btn btn-secondary btn-lg" id="ok-btn" onclick="tabform(this);">OK</button>
+        </div>
+
+        <div class="center-div-form" id="center-div3">
+            <select id="select3" onchange="dropdown_choice();">
+                <option value="" selected disabled hidden>Choose here</option>
+                <option value="draw-on-map">Draw on map</option>
+                <option value="geojson">Paste GeoJSON</option>
+                <option value="upload">Upload File</option>
+            </select>
+            <button type="button" onclick="tabback(this);">Back</button>
+            <button type="button" id="ok-btn" onclick="tabform(this);">OK</button>
+        </div>
+
+        <div class="center-div-form" id="center-div4">
+            <label for="start_date">Start date</label>
+            <input id="start_date" type="date">
+            <label for="end_date">End date</label>
+            <input id="start_date" type="date">
+
+
+            <select>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="biweekly">Biweekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="bimonthly">Bimonthly</option>
+            </select>
+            <button type="button" onclick="tabback(this);">Back</button>
+            <button type="button" id="ok-btn" onclick="tabform(this);">OK</button>
+        </div>
+
+        <div class="center-div-form" id="center-div5">
+            <label for="max-cost">Max cost:</label>
+            <input id="max-cost" type="text">
+
+            <label for="resolution-choice">Resolution:</label>
+            <select id="resolution-choice">
+                <option value="low-res">Low</option>
+                <option value="med-res">Medium</option>
+                <option value="high-res">High</option>
+            </select>
+
+            <label for="coverage-choice">Coverage:</label>
+            <select id="coverage-choice">
+                <option value="low-cov">Low</option>
+                <option value="med-cov">Medium</option>
+                <option value="high-cov">High</option>
+            </select>
+            <button type="button" onclick="tabback(this);">Back</button>
+            <button type="button" id="ok-btn" onclick="tabform(this);">OK</button>
+        </div>
+
+        <div class="center-div-form" id="last_form_div">
+            <select>
+                <option value="image-tc">True Colour</option>
+                <option value="image-fu">False Urban</option>
+                <option value="image-fci">False Colour Infrared</option>
+            </select>
+            <button type="button" onclick="tabback(this);">Back</button>
+            <button type="submit" id="ok-btn">Create</button>
+        </div>
+
+    </form>
+
+</div>
+
+<!-- 
+
+<div class="center-div" id="center-div1">
+    <h1>Use this application to create a new pipeline</h1>
+    <button id="ok-btn" onclick="tabform();">OK</button>
+</div>
+
+<div class="center-div" id="center-div2">
+    <h1>Create Pipeline</h1>
+    <form>
+        <input type="text" placeholder="Give your pipeline a unique identifier">
+        <input type="text" placeholder="Give your pipeline a description">
+    </form>
+    <button id="ok-btn" onclick="tabform2();">OK</button>
+</div>
+
+<div class="center-div" id="center-div3">
+    <h1>Create Pipeline</h1>
+    <h2>Choose location</h2>
+    <form id="form3">
+        <select id="select3" onchange="dropdown_choice();">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="draw-on-map">Draw on map</option>
+            <option value="geojson">Upload GeoJSON</option>
+        </select>
+    </form>
+    <button id="ok-btn" onclick="tabform3();">OK</button>
+</div>
+
+
+<div class="center-div" id="center-div4">
+    <h1>Create Pipeline</h1>
+    <h2>Pipeline timeline</h2>
+    <form id="form4">
+        <label for="start_date">Start date</label>
+        <input id="start_date" type="date">
+        <label for="end_date">End date</label>
+        <input id="start_date" type="date">
+
+
+        <select>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="biweekly">Biweekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="bimonthly">Bimonthly</option>
+        </select>
+    </form>
+    <button id="ok-btn" onclick="tabform4();">OK</button>
+</div>
+
+<div class="center-div" id="center-div5">
+    <h1>Create Pipeline</h1>
+    <h2>Pipeline parameters</h2>
+    <form id="form5">
+
+        <label for="max-cost">Max cost:</label>
+        <input id="max-cost" type="text">
+
+        <label for="resolution-choice">Resolution:</label>
+        <select id="resolution-choice">
+            <option value="low-res">Low</option>
+            <option value="med-res">Medium</option>
+            <option value="high-res">High</option>
+        </select>
+
+        <label for="coverage-choice">Coverage:</label>
+        <select id="coverage-choice">
+            <option value="low-cov">Low</option>
+            <option value="med-cov">Medium</option>
+            <option value="high-cov">High</option>
+        </select>
+
+
+    </form>
+    <button id="ok-btn" onclick="tabform5();">OK</button>
+</div>
+
+<div class="center-div" id="center-div6">
+    <h1>Create Pipeline</h1>
+    <h2>Output image</h2>
+    <form id="form6">
+        <select>
+            <option value="image-tc">True Colour</option>
+            <option value="image-fu">False Urban</option>
+            <option value="image-fci">False Colour Infrared</option>
+        </select>
+    </form>
+    <button type="submit" id="ok-btn">Create</button>
+</div> -->
+
+{%endblock%}
