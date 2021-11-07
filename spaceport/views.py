@@ -1,14 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
-from .models import PipelineList
+from .models import PipelineList, PipelineResults
 from .forms import CreatePipeline
 import requests
 import json
 
 
+# render the homepage  
+def homepage2(request):
+    return render(request, 'base2.html')
 
 # render the homepage  
 def homepage(request):
@@ -42,6 +45,11 @@ def delete_pipeline(request, id):
     # define object we want to delete from the pipeline list by passing in the id
     object_to_delete = PipelineList.objects.get(id=id)
     object_to_delete.delete()
+
+    ## DELETE THE API PIPELINE
+    # unique_pipeline_id = object_to_delete.unique_pipeline_id
+    # url = 'https://api.skywatch.co/earthcache/pipelines/{unique_pipeline_id}'
+    # delete_pipeline = requests.delete('')
 
     # redirect back to list pipelines - but need a delete validation here
     return redirect('/list_pipelines.html')
@@ -99,11 +107,6 @@ def create_pipeline(request):
             current_pipeline.created_by = user
             current_pipeline.status = True
 
-            print(f"start date:{current_pipeline.start_date}")
-            print(f"start date:{type(current_pipeline.start_date)}")
-
-            current_pipeline.save()
-
             form = CreatePipeline()
 
             result = "Form submission complete!"
@@ -124,7 +127,7 @@ def create_pipeline(request):
                 "end_date": str(current_pipeline.end_date),
                 "aoi": current_pipeline.AOI,
                 "max_cost": 0,
-                "min_aoi_coverage_percentage": 80,
+                "min_aoi_coverage_percentage": 50,
                 "result_delivery": {
                     "max_latency": "0d",
                     "priorities": [
@@ -147,22 +150,26 @@ def create_pipeline(request):
                 ]
                 }
 
-            print(params)
+            #print(params)
     
-            #response = requests.post(url,  headers={'x-api-key': 'dd7e14b9-f6c3-45d8-b234-7443a27947ef'}, json=params)
-
-            ## UPDATE PIPELINE LISTS OBJECT TO ADD THE UNIQUE ID FROM SKYWATCH
-            # unique_api_id = response['data'][0]
-            # current_pipeline.unique_api_id = unique_api_id
-
-            print(response)
+            #post_pipeline = requests.post(url,  headers={'x-api-key': 'dd7e14b9-f6c3-45d8-b234-7443a27947ef'}, json=params)
+            
+            #response = post_pipeline.json()
+            
+            # UPDATE PIPELINE LISTS OBJECT TO ADD THE UNIQUE ID FROM SKYWATCH
+            #unique_api_id = response['data']['id']
+            #current_pipeline.unique_api_id = unique_api_id
+            current_pipeline.save()
+            print(current_pipeline)
 
             ## CREATE THE RESULTS OBJECT FOR THIS API CALL - but only the id really cause post-detail will call the results API get
-            # new_pipeline_result = PipelineResults(id=unique_api_id)
-            # new_pipeline_result.save()
+            #new_pipeline_result = PipelineResults(unique_pipeline_id=unique_api_id)
+            #new_pipeline_result.save()
 
-            ## RENDER THE DETAIL VIEW FOR THIS PIPELINE ONCE SUBMITTED - does this need the pipeline id called???
-            # return render(request, 'post_detail.html', id=id)
+            ## RENDER THE DETAIL VIEW FOR THIS PIPELINE ONCE SUBMITTED
+            id = pipeline_id
+            return redirect(reverse('post_detail', args=[ id ]))
+    
 
         else:
             print("not valid")
@@ -181,7 +188,8 @@ def try_api(request):
 
     #url = 'https://api.skywatch.co/earthcache/pipelines'
     #url = 'https://api.skywatch.co/earthcache/pipelines/3752f093-bbd6-4555-8aea-e75423dbc41f'
-    url = 'https://api.skywatch.co/earthcache/pipelines/3752f093-bbd6-4555-8aea-e75423dbc41f/interval_results'
+    #url = 'https://api.skywatch.co/earthcache/pipelines/3752f093-bbd6-4555-8aea-e75423dbc41f/interval_results'
+    #url = 'https://api.skywatch.co/earthcache/pipelines/ca93c8a4-3813-11ec-9d9b-fa9d951a5380/interval_results'
 
     # params = {
     #     "name": "LUCY 8",
@@ -247,10 +255,13 @@ def try_api(request):
     #         }
     #     ]
     #     }
+
+    response = {"data": {"id": "37b57b48-3fa9-11ec-8e41-9a623311d0d3", "name": "Test10", "start_date": "2021-11-15", "end_date": "2021-11-18", "aoi": {"type": "Polygon", "coordinates": [[[2.286872863769531, 48.83602344356167], [2.4008560180664062, 48.83602344356167], [2.4008560180664062, 48.89271247049609], [2.286872863769531, 48.89271247049609], [2.286872863769531, 48.83602344356167]]]}, "area_km2": 52.67503533722846, "cloud_cover_percentage": 100, "min_aoi_coverage_percentage": 50, "interval": "30d", "resolution_low": 30, "resolution_high": 10, "output": {"id": "a8fc3dde-a3e8-11e7-9793-ae4260ee3b4b", "format": "geotiff", "mosaic": "off"}, "status": "pending", "tags": [{"label": "Texas", "value": "Ranch"}, {"label": "Resolution", "value": "10m"}], "created_at": "2021-11-07T09:00:55.729062Z", "updated_at": "2021-11-07T09:00:55.729062Z", "max_cost": 0, "result_delivery": {"max_latency": "0d", "priorities": ["latest", "highest_resolution", "lowest_cost"]}}}
     
-    response = requests.get(url,  headers={'x-api-key': 'dd7e14b9-f6c3-45d8-b234-7443a27947ef'}).json()
+    #response = requests.get(url,  headers={'x-api-key': 'dd7e14b9-f6c3-45d8-b234-7443a27947ef'}).json()
 
     print(response)
+    print(response['data']['id'])
 
     # print(response['data'][0])
 

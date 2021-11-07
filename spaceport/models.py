@@ -28,23 +28,13 @@ class PipelineList(models.Model):
     cloud_cover = models.DecimalField(max_digits = 5,decimal_places=2, null=True)      # % cloud cover allowed max
     resolution = models.CharField(max_length=20, null=True)               # picture resolution range eg 7680 × 6876
     output_format = models.CharField(max_length=1, choices=MY_CHOICES,null=True)            # image format type (selected by user) GEOTiff    
-
-# class PipelineResults(models.Model):
-#     satellite_id = models.PositiveIntegerField(blank=True, null=True)
-#     name = models.CharField(max_length=200, null=True)
-#     footprint = models.CharField(max_length=200, null=True)
-
-#     def __str__(self):
-#         return self.satellite_id
-
-#     class Meta:
-#         verbose_name_plural = 'satellite ids'
+    unique_api_id = models.CharField(max_length=200, blank=True)
 
 
 
-# class PipeLineChoice(models.Model):
-#     user_sat_num = models.IntegerField()
-#     created_at = models.DateTimeField(auto_now_add=True)
-
-#     # def __str__(self):
-#     #     return self.user_sat_num
+class PipelineResults(models.Model):
+    unique_pipeline_id = models.CharField(max_length=200, blank=True)
+    results_status = models.CharField(max_length=300)
+    # cloud_cover_percent = 
+    # valid_pixels_percent = 
+    # pic_size = 
