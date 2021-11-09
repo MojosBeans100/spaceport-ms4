@@ -11,6 +11,139 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+#userpage-top-div {
+  height: 350px;
+}
+
+#userpage-title {
+  margin-top: 5%;
+}
+
+#hello {
+  border: solid red 1px;
+}
+
+.status-container {
+  margin-bottom: 50px;
+}
+
+.border-class{
+  border: solid red 1px;
+}
+
+.base-img {
+  width: 100%;
+  height: 80%;
+}
+
+#user-lp-page-div{
+  top: 10%;
+  height: auto;
+  background-color: white;
+  border: solid black 1px;
+  width: 60%;
+  position: relative;
+  margin-left: 20%;
+ 
+}
+
+#list_pipelines_div{
+  width: 90%;
+  margin-left: 5%;
+  border: solid black 1px;
+  height: 400px;
+  margin-top: 3%;
+  display: flex;
+}
+
+#list_pl_left{
+  width: 60%;
+  float: left;
+  border: solid red 1px;
+}
+
+#list_pl_right{
+  width: 40%;
+  float: right;
+  border: solid blue 1px;
+}
+
+
+#user-lp-image{
+  background-image: url("../images/user-lp-image.jpg"); /* The image used */
+  background-color: #cccccc; /* Used if the image is unavailable */
+  height: 1200px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+
+/* USER LANDING PAGE */
+
+#s1-image{
+  background-color: grey;
+  height: 500px; /* You must set a specified height */
+  border: solid red 1px;
+}
+
+.status-div{
+  height: auto;
+  margin-bottom: 50px;
+}
+
+.status-heading{
+  margin-top: 2%;
+}
+
+#status-links{
+  display: flex;
+  width: 40%;
+  margin-left: 30%;
+  justify-content: space-around;
+}
+
+#s1-text-div{
+  width: 60%;
+  margin-left: 20%;
+  position: relative;
+  top: 40%;
+  height: 50%;
+  background-color:white;
+  border: solid green 1px;
+}
+
+#s2-middle-div {
+  width: 70%;
+  margin-left: 15%;
+  height: auto;
+  border: solid black 1px;
+}
+
+.s2-pipeline-list-active {
+  width: 90%;
+  margin-left: 5%;
+  height: 400px;
+  border: solid black 1px;
+  display: flex;
+}
+
+.s2-pipeline-left{
+  width: 60%;
+  float: left;
+}
+
+.s2-pipeline-right{
+  width: 40%;
+  float: right;
+}
+
+.pipeline-list-image{
+  width: 100%;
+  height: 100%;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -602,7 +735,8 @@ progress {
 
 .img-fluid {
   max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 350px;
 }
 
 .img-thumbnail {
@@ -3032,8 +3166,8 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #fff;
-  background-color: #ffc800;
-  border-color: #ffc800;
+  background-color: #c4560d;
+  border-color: #c4560d;
 }
 .btn-primary:hover {
   color: #fff;

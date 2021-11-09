@@ -1,0 +1,121 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+
+<!-- top section - image and summary of pipelines -->
+<div id="s1-image">
+    <div id="s1-text-div">
+        <h1>Welcome back {{user}}</h1>
+
+        <!-- if number of pipelines == 0 -->
+        <!-- <h2>You have no active pipelines - create one below</h2> -->
+        <h2>Active pipelines: 2</h2>
+        <h2>Complete pipelines: 1</h2>
+
+        <a href="#your-pipelines-h1">All pipelines</a>
+
+        <button type="button" class="btn-danger">All pipelines</button>
+        <button type="button" class="btn" href="#">Create new pipelines</button>
+    </div>
+</div>
+
+<!-- pipelines list section -->
+<div id="s2-middle-div">
+    <h1 id="your-pipelines-h1" style="text-align: center;">Your pipelines</h1>
+    <div id="status-links">
+        <a href="#active-status">Active</a>
+        <a href="#complete-status">Complete</a>
+        <a>In Progress</a>
+    </div>
+
+    <div class="status-div">
+        <!-- for pipeslines in ACTIVE pipeline list ie repeat this div -->
+        <h2 class="status-heading" id="active-status">Active: 2
+            <!-- Active: {{context.num_active}} -->
+        </h2>
+        <div class="s2-pipeline-list-active">
+            <!-- text info -->
+            <div class="s2-pipeline-left">
+                <h2><a href="">Guatemala Rainforest
+                        <!--{{context.name}}--></a></h2>
+                <h5>Monitoring rainforest destruction May-Aug
+                    <!--{{context.des}}-->
+                </h5>
+
+                <p>From May 01 2021 until Aug 15 2021
+                    <!--From {{context.start_date}} to {{context.end_date}}-->
+                </p>
+                <p>Area: 50km^2
+                    <!--{{context.area}}-->
+                </p>
+                <p>Results: 2 images, 1 in progress</p>
+            </div>
+
+            <!-- image/map -->
+            <div class="s2-pipeline-right">
+                <img class="pipeline-list-image" src="static/images/aerial-view-2.jpg">
+            </div>
+
+        </div>
+
+        <div class="s2-pipeline-list-active">
+            <!-- text info -->
+            <div class="s2-pipeline-left">
+                <h2><a href="">Mexico roads
+                        <!--{{context.name}}--></a></h2>
+                <h5>Monitor progress of road
+                    <!--{{context.des}}-->
+                </h5>
+
+                <p>From May 01 2021 until Aug 15 2021
+                    <!--From {{context.start_date}} to {{context.end_date}}-->
+                </p>
+                <p>Area: 80km^2
+                    <!--{{context.area}}-->
+                </p>
+                <p>Results: 0, 2 in progress</p>
+            </div>
+
+            <!-- image/map -->
+            <div class="s2-pipeline-right">
+                <img class="pipeline-list-image" src="static/images/aerial-view-2.jpg">
+            </div>
+
+        </div>
+    </div>
+    <div class="status-div">
+        <!-- for pipeslines in COMPLETE pipeline list ie repeat this div -->
+        <h2 class="status-heading" id="complete-status">Complete: 1</h2>
+
+        <div class="s2-pipeline-list-active">
+            <!-- text info -->
+            <div class="s2-pipeline-left">
+                <h2><a href="">Leeds UK
+                        <!--{{context.name}}--></a></h2>
+                <h5>Housing estate
+                    <!--{{context.des}}-->
+                </h5>
+
+                <p>From Feb 06 2021 until Feb 15 2021
+                    <!--From {{context.start_date}} to {{context.end_date}}-->
+                </p>
+                <p>Area: 8km^2
+                    <!--{{context.area}}-->
+                </p>
+                <p>Results: 4 images</p>
+            </div>
+
+            <!-- image/map -->
+            <div class="s2-pipeline-right">
+                <img class="pipeline-list-image" src="#">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- for pipeslines in IN PROGRESS pipeline list ie repeat this div -->
+    <h1>In progess: 0</h1>
+    <div></div>
+</div>
+{% endblock content %}

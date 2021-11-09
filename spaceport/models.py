@@ -13,6 +13,12 @@ class PipelineList(models.Model):
         ('d', 'Boas'),
     )
 
+    # STATUS = (
+    #     ('active', 'Active'),
+    #     ('complete', 'Complete'),
+    #     ('in_progress', 'In Progress'),
+    # )
+
     pipeline_id = models.CharField(max_length=20)              # AUTO unique identifier for this pipeline (auto generated?)
     slug = models.SlugField(max_length=200, unique=True, null=True)
     pipeline_name = models.CharField(max_length=50, unique=True)	        # user's given name for pipeline
@@ -20,6 +26,7 @@ class PipelineList(models.Model):
     created_by = models.CharField(max_length=100, null=True)	            # AUTO user	(username or email?)
     date_created = models.DateTimeField(auto_now=True)                      # AUTO date the pipeline was created (= today()?)
     status = models.BooleanField(default=False)	                            # AUTO pipeline active/not active (default to True when created?)
+    #status = models.CharField(max_length=15, choices=STATUS,null=True) 
     AOI = models.JSONField(null=True, blank=True)                                   # area of interest: location co-ordinates (need to be able to control size of this?)
     start_date = models.DateField(null=True)                                         # when pipeline starts capturing images
     end_date = models.DateField(null=True)	                                        # when pipeline ends	DateField or Null	31/12/2021

@@ -12,6 +12,8 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Agency - Start Bootstrap Theme</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -37,12 +39,14 @@
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
 
                     {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">My Pipelines</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Create Pipeline</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
                     {% else %}
-                    <li class="nav-item"><a class="nav-link" href="#">Create Account</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}">Sign In/Sign Up</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
@@ -51,30 +55,32 @@
             </div>
         </div>
     </nav>
+    {% block content %}
     <!-- Masthead-->
     <header class="masthead">
         <div class="container">
             <div class="masthead-heading text-uppercase">Spaceport</div>
-            <div class="masthead-subheading">Access satellite imagery</div>
+            <div class="masthead-subheading">Your access to high-resolution satellite imagery</div>
             <a class="btn btn-primary btn-xl text-uppercase" href="#services">Services</a>
         </div>
     </header>
     <!-- Services-->
+    
     <section class="page-section" id="services">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">What we do</h2>
-                <h3 class="section-subheading text-muted">See how you can access images for yourself</h3>
+                <h3 class="section-subheading text-muted">We provide users with the ability to access high resolution satellite images</h3>
             </div>
             <div class="row text-center">
                 <div class="col-md-4" style="border: solid yellow 1px;">
-                    <img class="base-img" src="../static/images/aerial-view-1.jpg" style="width: 100%; height: 100%;">
+                    <img class="base-img" src="../static/images/aerial-view-1.jpg">
                 </div>
                 <div class="col-md-4" style="border: solid yellow 1px;">
-                    <img class="base-img" src="../static/images/aerial-view-2.jpg" style="width: 100%; height: 100%;">
+                    <img class="base-img" src="../static/images/aerial-view-2.jpg">
                 </div>
                 <div class="col-md-4" style="border: solid yellow 1px;">
-                    <img class="base-img" src="../static/images/aerial-view-1.jpg" style="width: 100%; height: 100%;">
+                    <img class="base-img" src="../static/images/aerial-view-1.jpg"">
                 </div>
             </div>
         </div>
@@ -83,8 +89,8 @@
     <section class="page-section bg-light" id="portfolio">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-heading text-uppercase">Portfolio</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <h2 class="section-heading text-uppercase">Uses</h2>
+                <h3 class="section-subheading text-muted">The uses for satellite imagery are endless</h3>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-sm-6 mb-4">
@@ -94,11 +100,11 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/1.jpg" alt="..." />
+                            <img class="img-fluid" src="../static/images/wildfire.jpg" alt="..." />
                         </a>
                         <div class="portfolio-caption">
-                            <div class="portfolio-caption-heading">Threads</div>
-                            <div class="portfolio-caption-subheading text-muted">Illustration</div>
+                            <div class="portfolio-caption-heading">Detecting wildfires</div>
+                            <!-- <div class="portfolio-caption-subheading text-muted">Illustration</div> -->
                         </div>
                     </div>
                 </div>
@@ -109,11 +115,11 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/2.jpg" alt="..." />
+                            <img class="img-fluid" src="../static/images/deforestation.jpg" alt="..." />
                         </a>
                         <div class="portfolio-caption">
-                            <div class="portfolio-caption-heading">Explore</div>
-                            <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
+                            <div class="portfolio-caption-heading">Monitoring deforestation</div>
+                            <!-- <div class="portfolio-caption-subheading text-muted">Graphic Design</div> -->
                         </div>
                     </div>
                 </div>
@@ -124,11 +130,11 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/3.jpg" alt="..." />
+                            <img class="img-fluid" src="../static/images/crop-yield.jpg" alt="..." />
                         </a>
                         <div class="portfolio-caption">
-                            <div class="portfolio-caption-heading">Finish</div>
-                            <div class="portfolio-caption-subheading text-muted">Identity</div>
+                            <div class="portfolio-caption-heading">Monitor crop yield</div>
+                            <!-- <div class="portfolio-caption-subheading text-muted">Identity</div> -->
                         </div>
                     </div>
                 </div>
@@ -139,11 +145,11 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/4.jpg" alt="..." />
+                            <img class="img-fluid" src="../static/images/infrastructure.jpg" alt="..." />
                         </a>
                         <div class="portfolio-caption">
-                            <div class="portfolio-caption-heading">Lines</div>
-                            <div class="portfolio-caption-subheading text-muted">Branding</div>
+                            <div class="portfolio-caption-heading">Track infrastructure progress</div>
+                            <!-- <div class="portfolio-caption-subheading text-muted">Branding</div> -->
                         </div>
                     </div>
                 </div>
@@ -154,11 +160,11 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/5.jpg" alt="..." />
+                            <img class="img-fluid" src="../static/images/traffic.jpg" alt="..." />
                         </a>
                         <div class="portfolio-caption">
-                            <div class="portfolio-caption-heading">Southwest</div>
-                            <div class="portfolio-caption-subheading text-muted">Website Design</div>
+                            <div class="portfolio-caption-heading">Verify insurance claims</div>
+                            <!-- <div class="portfolio-caption-subheading text-muted">Website Design</div> -->
                         </div>
                     </div>
                 </div>
@@ -169,11 +175,11 @@
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/6.jpg" alt="..." />
+                            <img class="img-fluid" src="../static/images/vegetation.jpg" alt="..." />
                         </a>
                         <div class="portfolio-caption">
-                            <div class="portfolio-caption-heading">Window</div>
-                            <div class="portfolio-caption-subheading text-muted">Photography</div>
+                            <div class="portfolio-caption-heading">Vegetation overgrowth</div>
+                            <!-- <div class="portfolio-caption-subheading text-muted">Photography</div> -->
                         </div>
                     </div>
                 </div>
@@ -406,6 +412,7 @@
             </form>
         </div>
     </section>
+    
     <!-- Footer-->
     <footer class="footer py-4">
         <div class="container">
@@ -673,82 +680,8 @@
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    {% endblock content %}
 </body>
 
 </html>
 
-<!-- 
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}" />
-</head>
-
-<body>
-
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Logo</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container-fluid text-center">
-        <div class="row content">
-            <div class="col-sm-2 sidenav">
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
-            </div>
-            <div class="col-sm-8 text-left">
-                <h1>Welcome</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                    officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <hr>
-                <h3>Test</h3>
-                <p>Lorem ipsum...</p>
-            </div>
-            <div class="col-sm-2 sidenav">
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="container-fluid text-center" id="base-footer">
-        <p>Footer Text</p>
-    </footer>
-
-</body>
-
-</html> 
- -->

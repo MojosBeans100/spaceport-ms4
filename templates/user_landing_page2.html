@@ -1,0 +1,63 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+<div class="bg-primary text-white p-5 text-center" id="userpage-top-div">
+    <h1 id="userpage-title">My Pipelines</h1>
+    <p>Click on a pipeline to see a detailed view and results</p>
+</div>
+
+<!-- active pipelines -->
+<div class="container status-container">
+    <h1>Active</h1>
+    <div class="row">
+
+        {% for pl in active_list %}
+        <div class="card" style="width:300px">
+            <img src="static/images/aerial-view-1.jpg" alt="Image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">{{pl.pipeline_name}}</h4>
+                <p class="card-text">{{pl.pipeline_des}}</p>
+                <a href="#" class="btn btn-primary">See Pipeline</a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+<!-- {% for pl in active_list %}
+  <div class="col-sm-4" id="hello">
+    <h2>{{pl.pipeline_name}}</h2>
+      <p>{{pl.pipeline_des}}</p>
+  </div>
+  {% endfor %} -->
+
+<!-- complete pipelines -->
+
+<div class="container">
+    <h1>Complete</h1>
+    <div class="row">
+
+        {% for pl in complete_list %}
+        <div class="col-sm-4" id="hello">
+                <h2>{{pl.pipeline_name}}</h2>
+                <p>{{pl.pipeline_des}}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- <div class="container">
+    <h1>In Progress</h1>
+    <div class="row">
+
+      {% for pl in progress_list %}
+      <div class="col-sm-4" id="hello">
+        <h2>{{pl.pipeline_name}}</h2>
+        <p>{{pl.pipeline_des}}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div> -->
+{% endblock content %}

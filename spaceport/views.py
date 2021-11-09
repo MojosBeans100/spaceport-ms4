@@ -13,6 +13,21 @@ import json
 def homepage2(request):
     return render(request, 'base2.html')
 
+    # render the homepage  
+def post_detail2(request):
+    return render(request, 'post_detail2.html')
+
+# render the homepage  
+# def user_page2(request):
+#     return render(request, 'user_landing_page2.html')
+
+
+    
+# render the homepage  
+def userpage(request):
+    return render(request, 'user_landing_page.html')
+
+
 # render the homepage  
 def homepage(request):
     return render(request, 'base.html')
@@ -35,8 +50,17 @@ def detail_view(request, id):
     # url = 'https://api.skywatch.co/earthcache/pipelines/{unique_api_id}'
     # recent_results = response.get(url, headers={'x-api-key': 'dd7e14b9-f6c3-45d8-b234-7443a27947ef'}).json()
     # recent_results['data'][0]
+
+    #num_results = len()
          
     return render(request, "post_detail.html", context)
+
+
+# def update_pipeline():
+#     get api_id from PipelineList
+#     GET from API url
+#     update PipelineList: status, num_results
+#     update PipelineResults
 
 
 ## delete this instance of the model by passing in the object id
@@ -63,16 +87,30 @@ def lists(request):
     # filter list of pipelines to only the ones the user has created
     pipeline_list = PipelineList.objects.filter(created_by=user)
 
-    # if the pipeline list is empty, return text
-    if len(pipeline_list) == 0:
-        context = {'pipeline_list': "You currently have no pipelines"}
+    active_list =  PipelineList.objects.filter(created_by=user).filter(status=1)
+    complete_list = PipelineList.objects.filter(created_by=user).filter(status=0)
+    # in_progress_list = PipelineList.objects.filter(created_by=user).filter(status='in_progress')
 
-    # if not empty, return all pipelines created by user
-    else:
-        context = {'pipeline_list': pipeline_list}
+
+    #print(active_list)
+    context = {
+            'active_list': active_list,
+            'complete_list':complete_list,
+            #'progress': in_progress_list,
+            }
+
+    # # if the pipeline list is empty, return text
+    # if len(pipeline_list) == 0:
+    #     context = {'pipeline_list': "You currently have no pipelines"}
+
+    # # if not empty, return all pipelines created by user
+    # else:
+    #     context = {'pipeline_list': pipeline_list}
+    #     
 
     # return the list of pipelines
-    return render(request, 'list_pipelines.html', context)
+    return render(request, 'user_landing_page2.html', context)
+    # return render(request, 'list_pipelines.html', context)
 
 ## user can create a new pipeline
 def create_pipeline(request):
@@ -106,6 +144,7 @@ def create_pipeline(request):
             current_pipeline.pipeline_id = pipeline_id
             current_pipeline.created_by = user
             current_pipeline.status = True
+            # current_pipeline.status = Active
 
             form = CreatePipeline()
 
@@ -188,7 +227,7 @@ def try_api(request):
 
     #url = 'https://api.skywatch.co/earthcache/pipelines'
     #url = 'https://api.skywatch.co/earthcache/pipelines/3752f093-bbd6-4555-8aea-e75423dbc41f'
-    #url = 'https://api.skywatch.co/earthcache/pipelines/3752f093-bbd6-4555-8aea-e75423dbc41f/interval_results'
+    url = 'https://api.skywatch.co/earthcache/pipelines/3752f093-bbd6-4555-8aea-e75423dbc41f/interval_results'
     #url = 'https://api.skywatch.co/earthcache/pipelines/ca93c8a4-3813-11ec-9d9b-fa9d951a5380/interval_results'
 
     # params = {
@@ -260,9 +299,24 @@ def try_api(request):
     
     #response = requests.get(url,  headers={'x-api-key': 'dd7e14b9-f6c3-45d8-b234-7443a27947ef'}).json()
 
-    print(response)
-    print(response['data']['id'])
+    #print(response)
+
+    # number of results
+    print(len(response['data'][0]['results']))
+
+    # first result image
+    print(response['data'][0]['results'][0]['preview_url'])
+
+    # first image satellite source
+    print(response['data'][0]['results'][0]['metadata']['source'])
+
+    # first image cloud cover %
+    print(response['data'][0]['results'][0]['metadata']['cloud_cover_percentage'])
+
+    # pipeline status
+    #print(response['data'][0]['status'])
 
     # print(response['data'][0])
+    #print(response['data'][0])
 
     return render(request, 'results.html')
