@@ -7,11 +7,11 @@
     
     <div id="user-lp-page-div">
  
-         {% for pl in pipeline_list %}
+         {% for pl in active_list %}
         <!-- for all pipeslines -->
         <div id="list_pipelines_div">
             <div id=list_pl_left>
-                <h1>{{pl.pipeline_name}}</h1>
+                <a href="{% url 'post_detail' pl.id %}"><h1>{{pl.pipeline_name}}</h1></a>
             </div>
             <div id=list_pl_right></div>
 

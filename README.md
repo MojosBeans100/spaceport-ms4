@@ -172,3 +172,11 @@ For already created pipelines, the user has a chance to view and interrogate the
 # then from HTML to API back to models (ie the results)
 # then print the results in HTML
 
+
+## Epics, User Stories, Tasks
+
+
+## 3 Cs
+Card  -  the user story
+Conversation   - how to achieve, clarify details of the user story
+Confirmation  - confirm acceptance criteria for the user story

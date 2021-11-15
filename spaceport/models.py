@@ -40,8 +40,9 @@ class PipelineList(models.Model):
 
 
 class PipelineResults(models.Model):
-    unique_pipeline_id = models.CharField(max_length=200, blank=True)
-    results_status = models.CharField(max_length=300)
+    unique_pipeline_id = models.CharField(max_length=200, null=True)
+    results_status = models.CharField(max_length=300, null=True)
+    #pipeline_results_id = models.ForeignKey('PipelineList', on_delete=models.CASCADE)
     # cloud_cover_percent = 
     # valid_pixels_percent = 
     # pic_size = 

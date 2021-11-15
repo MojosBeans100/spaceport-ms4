@@ -1,17 +1,58 @@
-{% extends "base.html" %}
+<title>All Models</title>
 
-{% block content %}
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-<h1>See API Results</h1>
-<a href="{% url 'home' %}">Back to homepage</a>
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
 
-{% for model in model_list %}
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<h1>Pipeline List</h1>
+<h2>All</h2>
+
+<table>
+    <!-- column titles -->
+    <tr>
+        <th>id (primary key)</th>
+        <th>status</th>
+        <th>id (wrong)</th>
+        <th>name</th>
+        <th>des</th>
+        <th>created by</th>
+        <th>created at</th>
+        <th>start date</th>
+        <th>end date</th>
+    </tr>
+
+    <!-- for model in models -->
+    {% for pipeline in all_data %}
+    <tr>
+        <td>{{ pipeline.id }}</td>
+        <td>{{ pipeline.status }}</td>
+        <td>{{ pipeline.pipeline_id }}</td>
+        <td>{{ pipeline.pipeline_name }}</td>
+        <td>{{ pipeline.pipeline_des }}</td>
+        <td>{{ pipeline.created_by }}</td>
+        <td>{{ pipeline.date_created }}</td>
+        <td>{{ pipeline.start_date }}</td>
+        <td>{{ pipeline.end_date }}</td>
+    </tr>
+    {% endfor %}
 
 
-<p>{{ model.satellite_id }}</p>
-
-{% endfor %}
 
 
-{%endblock%}
+</table>
 
